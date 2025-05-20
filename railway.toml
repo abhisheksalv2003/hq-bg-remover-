@@ -1,0 +1,11 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pip install --upgrade pip && pip install -r requirements.txt && mkdir -p static/uploads static/outputs"
+
+startCommand = "gunicorn app:app"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "on-failure"
+
+[phases.setup]
+nixPkgs = ["python311", "gcc", "libglib", "libjpeg", "zlib", "libpng", "pkg-config", "libffi", "cairo", "pango", "gdk-pixbuf"] 
